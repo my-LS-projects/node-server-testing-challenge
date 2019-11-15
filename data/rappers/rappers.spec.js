@@ -11,33 +11,33 @@ describe("rappers model", () => {
     });
 
     it("should add a rapper", async () => {
-      await insert({ name: "viper" });
+      await insert({ rapper: "viper" });
 
       const rappers = await db("rappers");
       expect(rappers).toHaveLength(1);
     });
 
     it("should insert the provided rapper", async () => {
-      await insert({ name: "viper" });
-      await insert({ name: "lil b" });
+      await insert({ rapper: "viper" });
+      await insert({ rapper: "lil b" });
 
       const rappers = await db("rappers");
-      expect(rappers[0].name).toBe("viper");
-      expect(rappers[1].name).toBe("lil b");
+      expect(rappers[0].rapper).toBe("viper");
+      expect(rappers[1].rapper).toBe("lil b");
     });
   });
 
   describe('delete', () => {
     it('should delete rapper', async () => {
-        await remove({ name: 'death grips' })
+        await remove(1)
         
         const rappers = await db('rappers');
         expect(rappers).toHaveLength(1);
     })
 
     it('should delete all rappers', async () => {
-        await remove({ name: 'death grips' });
-        await remove({ name: "luvgangster" })
+        await remove(1);
+        await remove(2);
 
         const rappers = await db('rappers');
         expect(rappers).toHaveLength(0);
